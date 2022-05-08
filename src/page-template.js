@@ -1,12 +1,28 @@
+const thirdEye = employee => {
+    switch(employee.role) {
+        case "Manager":
+        return `Office number: ${employee.officeNumber}`;
+        case "Engineer":
+        return `Github: <a href="https://github.com/${employee.github}">${employee.github}</a>`;
+        case "Intern":
+        return `School: ${employee.school}`;
+    }
+};
+
 const generateMembers = employeeArray => {
     sectionHTML = ``;
 
     for(i = 0; i < employeeArray.length; i++) {
         sectionHTML += `<article>
         <section>
-        <h2>${employeeArray[0].name}</h2>
-        <h3>${employeeArray[0].role}</h3>
+        <h2>${employeeArray[i].name}</h2>
+        <h3>${employeeArray[i].role}</h3>
         </section>
+        <div class="content">
+        <p>ID: ${employeeArray[i].id}</p>
+        <p>Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></p>
+        <p>` + thirdEye(employeeArray[i]) + `</p>
+        </div>
         </article>`;
     }
 
@@ -14,8 +30,6 @@ const generateMembers = employeeArray => {
 };
 
 module.exports = templateData => {
-    console.log(templateData);
-
     return `<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,10 +43,6 @@ module.exports = templateData => {
         <header>My Team</header>
         <main>
             ${generateMembers(templateData)}
-            <article>text</article>
-            <article>text</article>
-            <article>text</article>
-            <article>text</article>
         </main>
     </body>
 </html>`;
