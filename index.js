@@ -73,6 +73,7 @@ function theAwakening() {
         }
     ]).then(({name, id, email, officeNumber, addMember}) => {
         this.manager = new Manager(name, id, email, officeNumber);
+        this.manager.role = this.manager.getRole();
 
         employeeArray.push(this.manager);
 
@@ -193,6 +194,7 @@ function addEngineer() {
         }
     ]).then(({name, id, email, github, addMember}) => {
         this.engineer = new Engineer(name, id, email, github);
+        this.engineer.role = this.engineer.getRole();
 
         employeeArray.push(this.engineer);
 
@@ -272,6 +274,7 @@ function addIntern() {
         }
     ]).then(({name, id, email, school, addMember}) => {
         this.intern = new Intern(name, id, email, school);
+        this.intern.role = this.intern.getRole();
 
         employeeArray.push(this.intern);
 

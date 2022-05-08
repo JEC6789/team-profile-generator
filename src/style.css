@@ -1,8 +1,8 @@
 :root {
-    --primary: #ccdad1;
-    --secondary: #9caea9;
-    --tertiary: #788585;
-    --light-dark: #6f6866;
+    --primary: #ffffff;
+    --secondary: #ff6961;
+    --tertiary: #06aed5;
+    --quaternary: #dddddd;
     --dark: #38302e;
     --border-radius: .3rem;
   }
@@ -20,6 +20,14 @@
     line-height: 1.5;
     font-size: 16px;
   }
+
+  header {
+    background-color: var(--secondary);
+    color: var(--primary);
+    font-size: 28px;
+    padding: 40px;
+    text-align: center;
+  }
   
   h1,
   h2,
@@ -29,13 +37,31 @@
   h6 {
     font-weight: 700;
     margin: 0;
-    color: var(--dark);
     line-height: 1.25;
   }
   
   main {
-    margin: 20px auto;
-    width: 94%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    height: calc(100vh - 122px);
+    margin: 0 auto;
+    min-width: 768px;
+    width: 90%;
+    max-width: 1280px;
+  }
+
+  article {
+    background-color: var(--quaternary);
+    box-shadow: 5px 5px 5px #7f7f7f;
+    width: 200px;
+  }
+
+  section {
+    background-color: var(--tertiary);
+    color: var(--primary);
+    padding: 12px;
   }
   
   p {
@@ -53,7 +79,7 @@
     color: var(--primary);
     border: none;
     outline: none;
-    background-color: var(--light-dark);
+    background-color: var(--quaternary);
     box-shadow: 3px 3px var(--dark);
     transform: translate(-1px, -1px);
   }
@@ -74,7 +100,7 @@
     color: var(--primary);
     border: none;
     outline: none;
-    background-color: var(--light-dark);
+    background-color: var(--quaternary);
     box-shadow: 3px 3px var(--secondary);
     transform: translate(-1px, -1px);
     display: inline-block;
@@ -109,7 +135,7 @@
     padding: 0 10px;
     display: inline-block;
     border-radius: var(--border-radius);
-    box-shadow: 6px 5px var(--light-dark);
+    box-shadow: 6px 5px var(--quaternary);
   }
   
   .list-group {
@@ -121,7 +147,7 @@
     margin-bottom: 10px;
     padding: 1.5%;
     border-radius: var(--border-radius);
-    background-color: var(--light-dark);
+    background-color: var(--quaternary);
     color: var(--primary);
     text-decoration: none;
   }
@@ -180,7 +206,7 @@
     padding: 3%;
     margin: 5px 0;
     font-size: 1.2rem;
-    border: 2px solid var(--light-dark);
+    border: 2px solid var(--quaternary);
     border-radius: var(--border-radius);
   }
   
