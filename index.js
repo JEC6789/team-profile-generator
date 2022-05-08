@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
 const Manager = require("./lib/Manager.js");
+const generatePage = require("./src/page-template");
 const employeeArray = [];
 
 function theAwakening() {
@@ -75,16 +76,52 @@ function theAwakening() {
 
         employeeArray.push(this.manager);
 
-        console.log(employeeArray);
-
         switch(addMember) {
             case "Engineer":
                 return addEngineer();
             case "Intern":
                 return addIntern();
-            case "Finish build":
-                return theEnd();
+            default:
+                return employeeArray;
         }
+    })
+    .then(employeeArray => {
+        return generatePage(employeeArray);
+    })
+    .then(pageHTML => {
+        return new Promise((resolve, reject) => {
+            fs.writeFile("./dist/index.html", pageHTML, err => {
+                if(err) {
+                    reject(err);
+                    return;
+                }
+                resolve({
+                    ok: true,
+                    message: "File created!"
+                });
+            });
+        });
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return new Promise((resolve, reject) => {
+            fs.copyFile("./src/style.css", "./dist/style.css", err => {
+                if(err) {
+                    reject(err);
+                    return;
+                }
+                resolve({
+                    ok: true,
+                    message: "File copied!"
+                });
+            });
+        });
+    })
+    .then(copyFileResponse => {
+        console.log(copyFileResponse);
+    })
+    .catch(err => {
+        console.log(err);
     });
 }
 
@@ -159,15 +196,13 @@ function addEngineer() {
 
         employeeArray.push(this.engineer);
 
-        console.log(employeeArray);
-
         switch(addMember) {
             case "Engineer":
                 return addEngineer();
             case "Intern":
                 return addIntern();
-            case "Finish build":
-                return theEnd();
+            default:
+                return employeeArray;
         }
     });
 }
@@ -240,21 +275,15 @@ function addIntern() {
 
         employeeArray.push(this.intern);
 
-        console.log(employeeArray);
-
         switch(addMember) {
             case "Engineer":
                 return addEngineer();
             case "Intern":
                 return addIntern();
-            case "Finish build":
-                return theEnd();
+            default:
+                return employeeArray;
         }
     });
-}
-
-function theEnd() {
-    console.log("Too fast, too soon");
 }
 
 theAwakening();
