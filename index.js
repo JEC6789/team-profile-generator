@@ -83,46 +83,8 @@ function theAwakening() {
             case "Intern":
                 return addIntern();
             default:
-                return employeeArray;
+                return theEnd(employeeArray);
         }
-    })
-    .then(employeeArray => {
-        return generatePage(employeeArray);
-    })
-    .then(pageHTML => {
-        return new Promise((resolve, reject) => {
-            fs.writeFile("./dist/index.html", pageHTML, err => {
-                if(err) {
-                    reject(err);
-                    return;
-                }
-                resolve({
-                    ok: true,
-                    message: "File created!"
-                });
-            });
-        });
-    })
-    .then(writeFileResponse => {
-        console.log(writeFileResponse);
-        return new Promise((resolve, reject) => {
-            fs.copyFile("./src/style.css", "./dist/style.css", err => {
-                if(err) {
-                    reject(err);
-                    return;
-                }
-                resolve({
-                    ok: true,
-                    message: "File copied!"
-                });
-            });
-        });
-    })
-    .then(copyFileResponse => {
-        console.log(copyFileResponse);
-    })
-    .catch(err => {
-        console.log(err);
     });
 }
 
@@ -204,7 +166,7 @@ function addEngineer() {
             case "Intern":
                 return addIntern();
             default:
-                return employeeArray;
+                return theEnd(employeeArray);
         }
     });
 }
@@ -284,8 +246,47 @@ function addIntern() {
             case "Intern":
                 return addIntern();
             default:
-                return employeeArray;
+                return theEnd(employeeArray);
         }
+    });
+}
+const theEnd = data => {
+    console.log("Generating HTML...");
+    pageHTML = generatePage(data);
+    console.log("Writing HTML to file...");
+    writeFile(pageHTML);
+    console.log("Copying CSS...");
+    copyFile();
+    console.log("Page created!");
+};
+
+const writeFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile("./dist/index.html", fileContent, err => {
+            if(err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: "File created!"
+            });
+        });
+    });
+}
+
+const copyFile = () => {
+    return new Promise((resolve, reject) => {
+        fs.copyFile("./src/style.css", "./dist/style.css", err => {
+            if(err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: "File copied!"
+            });
+        });
     });
 }
 
